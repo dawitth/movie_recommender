@@ -21,7 +21,7 @@ class Home extends Component {
     
 
     
-
+    this.setRedirect = this.setRedirect.bind(this);
     this.newCounter = this.newCounter.bind(this);
     this.incrementCounter = this.incrementCounter.bind(this);
     this.decrementCounter = this.decrementCounter.bind(this);
@@ -32,11 +32,9 @@ class Home extends Component {
 
   setRedirect() {
     this.setState({
-      redirect : false
+      redirect : true
     })
-    
 
-    alert()
 
   }
 
