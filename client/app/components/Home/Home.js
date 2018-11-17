@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 
+import Cards, { Card } from 'react-swipe-card'
+
 
 import { Redirect, browserHistory } from 'react-router';
 
 
 import HelloWorld from '../HelloWorld/HelloWorld';
+
+
+
+const Wrapper = ({data, onSwipeLeft, onSwipeRight}) => {
+  return (
+    <Cards onEnd={console.log("action('end')")} className='master-root'>
+      {data.map(item =>
+        <Card
+          key={item}
+          onSwipeLeft={() => onSwipeLeft(item)}
+          onSwipeRight={() => onSwipeRight(item)}>
+          <h2>{item}</h2>
+        </Card>
+      )}
+    </Cards>
+  )
+}
 
 
 class Home extends Component {
@@ -40,7 +59,7 @@ class Home extends Component {
 
   renderRedirect(){
       if (this.state.redirect) {
-      return <Redirect to='/target' />
+      return <Redirect to='../SecondPage/SecondPage' />
     }
   }
 
@@ -113,39 +132,22 @@ class Home extends Component {
     });
   }
 
+
   render() {
+
     return (
       <>
 
-        <p>movie recommender:</p>
-        <p>Select your favourite movies below</p>
-        <button onClick={() => this.incrementCounter(i)}>Movie1</button>
-        <button onClick={() => this.incrementCounter(i)}>Movie2</button>
-        <button onClick={() => this.incrementCounter(i)}>Movie3</button>
-        <button onClick={() => this.incrementCounter(i)}>Movie4</button>
-        <button onClick={() => this.incrementCounter(i)}>Movie5</button>
-        <button onClick={() => this.incrementCounter(i)}>Movie6</button>
-        
+        <p>Movie Match:</p>
+       
 
         <div>
         {this.renderRedirect()}
-        <button onClick={this.setRedirect}>Redirect</button>
+        <button onClick={this.setRedirect}>Select movies</button>
        </div>
 
 
 
-        <ul>
-          { this.state.counters.map((counter, i) => (
-            <li key={i}>
-              <span>{counter.count} </span>
-              <button onClick={() => this.incrementCounter(i)}>+</button>
-              <button onClick={() => this.decrementCounter(i)}>-</button>
-              <button onClick={() => this.deleteCounter(i)}>x</button>
-            </li>
-          )) }
-        </ul>
-
-        <button onClick={this.newCounter}>New counter</button>
       </>
     );
   }
